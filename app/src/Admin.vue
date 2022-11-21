@@ -27,6 +27,7 @@
             th Downloaded
             th Expire
             th Size
+            th
         template(v-for="(bucket, sid) in db")
           tbody(:class="{expanded: expand===sid}")
             tr.bucket(@click="expandView(sid)")
@@ -41,6 +42,8 @@
                 template(v-if="typeof sum[sid].firstExpire === 'number'") {{ sum[sid].firstExpire | date }}
                 template(v-else)  {{ sum[sid].firstExpire }}
               td.text-right {{ humanFileSize(sum[sid].size) }}
+              td
+                a(:href="'/'+sid") Öffnen
           tbody.expanded(v-if="expand === sid")
             template(v-for="file in bucket")
               tr.file

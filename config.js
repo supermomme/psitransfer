@@ -24,27 +24,19 @@ const config = {
   "forceHttps": '',
   // retention options in seconds:label
   "retentions": {
-    "one-time": "one time download",
-    "3600": "1 Hour",
-    "21600": "6 Hours",
-    "86400": "1 Day",
-    "259200": "3 Days",
-    "604800": "1 Week",
-    "1209600": "2 Weeks",
-    "2419200": "4 Weeks",
-    "4838400": "8 Weeks"
+    "63072000": "2 Years"
   },
   // admin password, set to false to disable /admin page
-  "adminPass": false,
+  "adminPass": "admin",
   // upload password, set to false to disable
   "uploadPass": false,
   // make the bucket-password field mandatory
   "requireBucketPassword": false,
-  "defaultRetention": "604800",
+  "defaultRetention": "63072000",
   // expire every file after maxAge (eg never downloaded one-time files)
-  "maxAge": 3600 * 24 * 75, // 75 days
+  "maxAge": 3600 * 24 * 365, // 75 days
   // maximum file-size for previews in byte
-  "maxPreviewSize": Math.pow(2, 20) * 2, // 2MB
+  "maxPreviewSize": Math.pow(2, 20) * 60, // 2MB
   "mailTemplate": 'mailto:?subject=File Transfer&body=You can download the files here: %%URL%%',
   // see https://github.com/expressjs/morgan
   // set to false to disable logging
@@ -55,7 +47,7 @@ const config = {
   "fileDownloadedWebhook": null,
   "fileUploadedWebhook": null,
   // Fallback language
-  "defaultLanguage": "en",
+  "defaultLanguage": "de",
   // Limit upload size
   "maxFileSize": null, // Math.pow(2, 30) * 2, // 2GB
   "maxBucketSize": null, // Math.pow(2, 30) * 2, // 10GB

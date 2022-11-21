@@ -19,21 +19,21 @@
         |  {{ $root.lang.login }}
     div(v-else-if="$root.configFetched")
       .well(v-show="state === 'uploaded'")
-        .pull-right.btn-group.upload-success-btns
-          a.btn.btn-primary(@click.prevent="showQrCode" href="#" :title="$root.lang.showQrCode")
-            icon.fa-fw(name="qrcode")
-            | QR-Code
-          a.btn.btn-primary(:href="mailLnk" :title="$root.lang.sendViaMail")
-            icon.fa-fw(name="envelope")
-            |  {{ $root.lang.email }}
-          clipboard.btn.btn-primary(:value='shareUrl' :title="$root.lang.copyToClipboard")
+        //- .pull-right.btn-group.upload-success-btns
+        //-   a.btn.btn-primary(@click.prevent="showQrCode" href="#" :title="$root.lang.showQrCode")
+        //-     icon.fa-fw(name="qrcode")
+        //-     | QR-Code
+        //-   a.btn.btn-primary(:href="mailLnk" :title="$root.lang.sendViaMail")
+        //-     icon.fa-fw(name="envelope")
+        //-     |  {{ $root.lang.email }}
+        //-   clipboard.btn.btn-primary(:value='shareUrl' :title="$root.lang.copyToClipboard")
         h3.text-success
           icon.fa-fw(name="check")
           |  {{ $root.lang.uploadCompleted }}
-        div.share-link
-          span.title {{ $root.lang.downloadLink }}:
-          |
-          a(:href='shareUrl') {{ shareUrl }}
+        //- div.share-link
+        //-   span.title {{ $root.lang.downloadLink }}:
+        //-   |
+        //-   a(:href='shareUrl') {{ shareUrl }}
       .row.overall-process(v-show="state === 'uploading'")
         .col-xs-12
           icon.pull-left(name="spinner", scale="2", spin="", style="margin-right: 10px")
@@ -42,10 +42,10 @@
               span(v-show='percentUploaded>8') {{ percentUploaded }}%
               span(v-show='percentUploaded>15' style="margin-left: 10px") ({{ humanFileSize(bytesUploaded) }} / {{ humanFileSize(bucketSize) }})
       .row
-        .col-sm-7
+        .col-sm-12
           files
-        .col-sm-5
-          settings
+        .col-sm-12
+          //- settings
           .text-right(v-show='showUploadBtn')
             button#uploadBtn.btn.btn-lg.btn-success(@click="$store.dispatch('upload/upload')")
               icon.fa-fw(name="upload")
@@ -87,10 +87,9 @@
         uploadPasswordWrong: null,
       }
     },
-
     computed: {
       ...mapState(['state']),
-      ...mapState('config', ['uploadPassRequired', 'uploadPass', 'requireBucketPassword']),
+      ...mapState('config', ['enableUploadSettings', 'uploadPassRequired', 'uploadPass', 'requireBucketPassword']),
       ...mapState('upload', ['sid', 'files', 'password']),
       ...mapGetters(['error', 'disabled']),
       ...mapGetters('upload', ['percentUploaded', 'shareUrl', 'bucketSize', 'bytesUploaded']),
@@ -121,6 +120,7 @@
 
     methods: {
       newSession() {
+        console.log(this)
         if (!confirm(this.$root.lang.createNewUploadSession)) return;
         document.location.reload();
       },
